@@ -1,0 +1,10 @@
+{
+  "HOME": "/",
+  "COUNTER": "/counter",
+  "FILE": "/fileDisplay",
+  "BOOLEAN":"/Boolean",
+  "VECTORSPACE":"/VectorSpace",
+  "KNN":"/KNN",
+  "KMEAN":"/KMean",
+  "WHATSCOOKING":"/WhatsCooking"
+}

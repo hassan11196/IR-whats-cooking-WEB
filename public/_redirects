@@ -1,0 +1,10 @@
+
+/authentication/*  http://ira3.herokuapp.com/authentication/:splat 200
+/static/*  http://ira3.herokuapp.com/static/:splat 200
+
+/iindex/*  http://ira3.herokuapp.com/iindex/:splat  200
+/vsm/*  http://ira3.herokuapp.com/vsm/:splat  200
+/classification/*  http://ira3.herokuapp.com/classification/:splat  200
+/clustering/*  http://ira3.herokuapp.com/clustering/:splat  200
+
+/* /index.html 200

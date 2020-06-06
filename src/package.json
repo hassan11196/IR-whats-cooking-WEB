@@ -1,0 +1,19 @@
+{
+  "name": "ir-whats-cooking-web",
+  "proxy": "http://localhost:8000",
+  "productName": "IR-whats-cooking-WEB",
+  "version": "1.0.0",
+  "description": "A React-Redux based Front-end Web Application For Information Retrieval and Artificial Intelligence - Project - CS317 & CS401 - FAST NUCES (Karachi)",
+  "main": "./main.prod.js",
+  "author": {
+    "name": "M.Hassan Ahmed",
+    "email": "hassan11196@hotmail.com",
+    "url": "https://www.hassan11196.codes/"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ../internals/scripts/BabelRegister.js ../internals/scripts/ElectronRebuild.js",
+    "postinstall": "yarn electron-rebuild"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}

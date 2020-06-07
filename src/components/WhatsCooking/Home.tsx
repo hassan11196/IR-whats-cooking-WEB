@@ -2,7 +2,6 @@
 /* eslint-disable react/no-array-index-key */
 import { List, Image,Card,Pagination,Segment,Flag } from 'semantic-ui-react'
 import React, { useState, useEffect, Component } from "react";
-import {ReactEmoji} from 'react-emoji'
 import { Link } from "react-router-dom";
 import { Initial } from 'react-initial';
 
@@ -34,11 +33,8 @@ import Select from 'react-select'
 import SweetAlert from "sweetalert-react";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
-// import axios from '../axios';
 import "semantic-ui-css/semantic.min.css";
 import routes from "../../constants/routes.json";
-// import { updateDocs, clearDocs } from '../actions/docPostingList';
-// import docPostingList from '../reducers/docPostingList';
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -120,11 +116,11 @@ export default function Home(props: Props) {
   }
 
   const onChangePage = (e) => {
+    console.log(e.target.value)
     var val = e.target.value;
     
     if (e.target.value === '' || e.target.value === 0) {
       setCurrent(0)
-      return;
     } else if (
       e.target.value === null ||
       e.target.value === undefined 
@@ -418,7 +414,7 @@ export default function Home(props: Props) {
         }}
       >
         <h1 style={{ fontSize: 65 }}>
-          {"Information Retrieval - WhatsCooking".split("").map((letter, index) => (
+          {"WhatsCooking".split("").map((letter, index) => (
             <span
               key={letter + index}
               style={{ color: GoogleColors[index % 4] }}
@@ -433,11 +429,15 @@ export default function Home(props: Props) {
       <div >
 
   <Row style={{margin:'1rem',opacity:'1'}}>
-    <Col md="6">
-    <Card style={{width:'100%',height:'45rem'}}>
-      <Input style={{marginTop:"0.5rem", marginLeft: '0.5rem',marginRight: '0.5rem'}} icon='search' placeholder='Search...'  onChange={onSearch}/>
+    <Col md="12">
+    <Card style={{width:'100%',height:'43rem', backgroundColor:"black",opacity:"0.9"}}>
       {/* </div> */}
-<Card.Content>
+      <Row>
+<Col md="8">
+<Input style={{width:'102%', marginTop:"0.5rem", marginLeft: '0.5rem',marginRight: '0.5rem'}} icon='search' placeholder='Click on item to select...'  onChange={onSearch}/>
+
+<Card.Content style={{marginTop:'1rem',height:"34rem"}}>
+ 
 <List divided relaxed>
     {
       copyList.map((item,index)=>{
@@ -447,10 +447,10 @@ export default function Home(props: Props) {
         )
         return(
           <List.Item name={item}  key={index} onClick={(e,item)=>{handleCreate(e,item)}}>
-      <List.Icon name='github' size='large' verticalAlign='middle' />
+      {/* <List.Icon name='github' size='large' verticalAlign='middle' /> */}
       <List.Content>
         <List.Header as='a'>
-        <span style={{marginLeft:'-10px', marginRight:'1rem',borderRadius:'50%'}}>
+        <span style={{marginLeft:'10px', marginRight:'1rem',borderRadius:'50%'}}>
       <Initial
                                           radius={2222}
                                           height={35}
@@ -459,7 +459,7 @@ export default function Home(props: Props) {
                                           fontSize={20}
                                           name={item}
                                         />
-        </span >{item}</List.Header></List.Content>
+        </span ><span style={{ color: GoogleColors[index % 4] }}>{item}</span></List.Header></List.Content>
     </List.Item>
         )
       })
@@ -467,7 +467,7 @@ export default function Home(props: Props) {
     
   </List>
   </Card.Content>
-  <Card.Content extra  >
+  <Card.Content extra  style={{float:"bottom",marginTop:'1rem'}}>
   <div
                           style={{
                             display: 'flex',
@@ -478,9 +478,10 @@ export default function Home(props: Props) {
                           }}
                         >
                           <span
-                            style={{ paddingRight: '3px', paddingTop: '0.5rem' }}
+                            style={{ paddingRight: '3px', marginTop: '0',marginLeft:'0.5rem' }}
                           >
-                            <Button    onClick={goBack} icon labelPosition='left'>
+                            <Button 
+                             style={{border:'1px solid white',backgroundColor:"black",color:'white'}}   onClick={goBack} icon labelPosition='left'>
                 <Icon className='left arrow' />
                         Previous
                       </Button>
@@ -498,6 +499,7 @@ export default function Home(props: Props) {
                           >
                             <span
                               style={{
+                                color:"white",
                                 display: 'inline',
                                 paddingRight: '1rem',
                                 fontSize: '14px',
@@ -507,15 +509,18 @@ export default function Home(props: Props) {
                               Page
                             </span>
                             <span style={{ display: 'inline-block' }}>
-                              <Input
+                             <Input
                                 style={{ height: '2rem', width: '4rem' }}
                                 value={currentPage}
                                 onChange={onChangePage}
                                 type="number"
                               />
+
+                              
                             </span>
                             <span
                               style={{
+                                color:"white",
                                 display: 'inline',
                                 paddingLeft: '1rem',
                                 fontSize: '14px'
@@ -525,6 +530,7 @@ export default function Home(props: Props) {
                             </span>
                             <span
                               style={{
+                                color:"white",
                                 display: 'inline',
                                 paddingLeft: '1rem',
                                 paddingRight: '1rem',
@@ -538,11 +544,13 @@ export default function Home(props: Props) {
                           <span
                             style={{
                               display: 'inline',
-                              paddingTop: '0.5rem',
-                              paddingRight: '0  '
+                              paddingTop: '0',
+                              marginRight: '-20px'
                             }}
                           >
                       <Button  onClick={goForward}
+                      // content='Secondary'
+                      style={{backgroundColor:"black",color:'white',border:'1px solid white'}}
                               icon labelPosition='right'>
                         Next
                         <Icon className='right arrow' />
@@ -550,22 +558,20 @@ export default function Home(props: Props) {
                    </span>
                         </div>
   </Card.Content>
-  </Card>
-
-    </Col>
-    <Col>
+  </Col>
+  <Col md="4">
   {
-    List2.length === 0 ? <Card style={{width:'100%',height:'45rem'}}>
+    List2.length === 0 ? <Card style={{backgroundColor:"black",opacity:"0.9",width:'100%',height:'43rem'}}>
       <Card.Content>
-      <h1 style={{textAlign:"center",color:'black',marginTop:'20rem'}}>
+      <h1 style={{textAlign:"center",color:'white',marginTop:'20rem'}}>
         No Data Selected
-        {emoji.getUnicode("heart_eyes")}
+        ☹️
         </h1>
       </Card.Content>
     </Card> :
-    <Card style={{width:'100%',height:'45rem'}}>
+    <Card style={{width:'100%',height:'43rem',backgroundColor:"black",opacity:"0.9"}}>
 
-<Card.Header style={{height:' 3rem',marginTop:'-2px',marginRight:'-1px',marginLeft:'-2px',backgroundColor: 'black',}}>
+<Card.Header style={{height:' 3rem',backgroundColor: 'black',}}>
 <h4 style={{fontSize:'25px',marginTop:"0.25rem", verticalAlign:"middle",textAlign:"center",color:'white'}}>
         Selected Ingridients
       </h4>
@@ -576,8 +582,8 @@ export default function Home(props: Props) {
       List2.map((item,index)=>{
         return(
           <Col style={{marginBottom:'0.5rem'}} key={index} xs={6}>
-            <Card name={item}  onClick={(e,item)=>{handleCreate2(e,item)}}>
-          <Card.Content style={{backgroundColor:'grey',color:'black',fontWeight:'700',textAlign:'center '}}>
+            <Card name={item}   onClick={(e,item)=>{handleCreate2(e,item)}}>
+          <Card.Content  style={{backgroundColor:GoogleColors[index % 5],color:'black',fontWeight:'700',textAlign:'center '}}>
           {item}
             
           </Card.Content>
@@ -591,16 +597,19 @@ export default function Home(props: Props) {
   <Card.Content extra>
    <div style={{float:'right'}}>
    <Button onClick={()=>{setModal(true)}}>
-      Cuisine
+      Result
     </Button>
    </div>
    
-    {/* <span style={{fontWeight:'bold'}}>Cuisine</span>
-    <Flag name={'es'} /> */}
   </Card.Content>
   </Card>
   }
       
+                  
+  </Col>
+  </Row>
+  </Card >
+
     </Col>
   </Row>
   

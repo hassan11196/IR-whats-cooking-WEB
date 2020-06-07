@@ -4,7 +4,7 @@ import { List, Image,Card,Pagination,Segment,Flag } from 'semantic-ui-react'
 import React, { useState, useEffect, Component } from "react";
 import { Link } from "react-router-dom";
 import { Initial } from 'react-initial';
-
+import './Home.css'
 import { Multiselect } from 'react-widgets';
 import 'react-widgets/dist/css/react-widgets.css';
 
@@ -425,18 +425,18 @@ export default function Home(props: Props) {
         </h1>
         {/* <h1>Project - WhatsCooking</h1> */}
       </div>
-      <Container p="100px" l="10px">
+      <Container  p="100px" l="10px">
       <div >
 
-  <Row style={{margin:'1rem',opacity:'1'}}>
-    <Col md="12">
-    <Card style={{width:'100%',height:'43rem', backgroundColor:"black",opacity:"0.9"}}>
+  <Row  style={{margin:'1rem',opacity:'1'}}>
+    <Col  md="12">
+    <Card id="mainCard"  style={{width:'100%',height:'43rem'}}>
       {/* </div> */}
       <Row>
-<Col md="8">
+<Col md="8" >
 <Input style={{width:'102%', marginTop:"0.5rem", marginLeft: '0.5rem',marginRight: '0.5rem'}} icon='search' placeholder='Click on item to select...'  onChange={onSearch}/>
 
-<Card.Content style={{marginTop:'1rem',height:"34rem"}}>
+<Card.Content  style={{marginTop:'1rem',height:"34rem"}}>
  
 <List divided relaxed>
     {
@@ -561,7 +561,7 @@ export default function Home(props: Props) {
   </Col>
   <Col md="4">
   {
-    List2.length === 0 ? <Card style={{backgroundColor:"black",opacity:"0.9",width:'100%',height:'43rem'}}>
+    List2.length === 0 ? <Card id="mainCard1" style={{backgroundColor:"black",opacity:"0.9",width:'100%',height:'43rem'}}>
       <Card.Content>
       <h1 style={{textAlign:"center",color:'white',marginTop:'20rem'}}>
         No Data Selected
@@ -569,7 +569,7 @@ export default function Home(props: Props) {
         </h1>
       </Card.Content>
     </Card> :
-    <Card style={{width:'100%',height:'43rem',backgroundColor:"black",opacity:"0.9"}}>
+    <Card id="mainCard1" style={{width:'100%',height:'43rem',backgroundColor:"black",opacity:"0.9"}}>
 
 <Card.Header style={{height:' 3rem',backgroundColor: 'black',}}>
 <h4 style={{fontSize:'25px',marginTop:"0.25rem", verticalAlign:"middle",textAlign:"center",color:'white'}}>

@@ -4,6 +4,7 @@ import { List, Image,Card,Pagination,Segment,Flag } from 'semantic-ui-react'
 import React, { useState, useEffect, Component } from "react";
 import { Link } from "react-router-dom";
 import { Initial } from 'react-initial';
+// import {axios} from "axios";
 import './Home.css'
 import { Multiselect } from 'react-widgets';
 import 'react-widgets/dist/css/react-widgets.css';
@@ -98,7 +99,7 @@ export default function Home(props: Props) {
   const [listLength, setLength] =useState(copyList.length)
   const [Answer,setAnswer] = useState('italian')
   const [Countrycode, setCode] = useState('') 
-  
+  const [flag,setFlag] = useState(false)
   const getFlag = (Cname) =>{
     console.log("bahar",Cname)
     countries.map((item,index)=>{
@@ -114,7 +115,35 @@ export default function Home(props: Props) {
     <Flag name={item} />
   )
   }
-
+  const getData = ()=>{
+    if(flag===false){
+      axios
+        .get("/api/ingredients?limit=3000&offset=0")
+        .then(response => {
+          console.log(response.data.data)
+          setList1(response.data.data)
+          setCopy(response.data.data)
+          setFlag(true)
+          console.log(copyList)
+          var i = 0;
+          i = copyList.length;
+          setLength(i);
+          var a = listLength/10;
+          a = Math.ceil(a)
+          setTotal(a)
+          return response;
+        }).then(
+          
+        )
+        .catch(err => {
+          // setServerDown(true);
+        });
+    }
+    else{
+      return
+    }
+    
+  }
   const onChangePage = (e) => {
     console.log(e.target.value)
     var val = e.target.value;
@@ -160,6 +189,7 @@ export default function Home(props: Props) {
       let cp = currentPage
       let pi = prevIndex
       let li = lastIndex
+      console.log(typeof(cp))
       setCurrent(cp+1)
       setPrev(pi+10)
       setLast(li+10)
@@ -201,123 +231,34 @@ export default function Home(props: Props) {
   };
   const MODEL_NAME = 'KNN';
   const DATASET_NAME = 'bbcsport';
-
-  const postStartIndexer = () => {
-    const formd = new FormData();
-    formd.append("csrfmiddlewaretoken", cookie);
-    formd.append("dataset", DATASET_NAME);
-    formd.append("train_size",  String(newTrainSize) );
-    formd.append("test_size",String(newTestSize));
-    formd.append("k", String(K));
-    formd.append('distance_formula',distanceFormula)
-    formd.append('re_index', reIndex);
-
-    const res = axios
-      .post(`/classification/model/${MODEL_NAME}`, formd, {
-        withCredentials: true
-      })
-      .then(response => {
-        console.log(response);
-        setAlert({
-          status: true,
-          title: "Document Indexing and Model Training Complete",
-          text: "Documents Have Been Index"
-        });
-        return response;
-      })
-      .catch(e => console.error(e));
-  };
-  const postQuery = () => {
-    const formd = new FormData();
-    console.log(cookie);
-
-    if (K < 0) {
-      setAlert({
-        status: true,
-        title: "Incorrect k",
-        text: "Please Select a proper cutoff"
-      });
-      return;
-    }
-    formd.append("csrfmiddlewaretoken", cookie);
-    formd.append("query", query);
-    formd.append("k", K.toString());
-    formd.append("dataset", DATASET_NAME);
-    const res = axios
-      .post(`/classification/predict/${MODEL_NAME}`, formd, {
-        withCredentials: true
-      })
-      .then(response => {
-        console.log(response);
-
-        // if (response.data.type === 'set') {
-        //   setResultType('set');
-        //   setDocs(response.data.docs);
-        //   setFirstPage(response.data.docs[0]);
-        //   return response;
-        // }
-        setResultType(response.data.type);
-        setLabel(response.data.result[0]);
-       
-        return response;
-      })
-      .then(response => {
-        setQueryFetchStatus(true);
-        return response;
-      })
-      .catch(err => {
-        console.log(err);
-        setAlert({ status: true, title: err, text: err.response.data.message });
-      });
-  };
-
-  const fetchData = () => {
-    if (dataFetched === false) {
-      axios
-        .get(`/classification/model/${MODEL_NAME}`)
-        .then(response => {
-          setmodelProperties(response.data.data);
-          // setDataFetched(true);
-          return response;
-        })
-        .catch(err => {
-          setServerDown(true);
-        });
-      axios
-        .get(`/classification/predict/${MODEL_NAME}`)
-        .then(response => {
-          setChoiceFunctions(response.data.data);
-          setDataFetched(true);
-          return response;
-        })
-        .catch(err => {
-          setServerDown(true);
-        });
-
-      axios
-        .get("/authentication/get_csrf/")
-        .then(response => {
-          console.log(response.data.csrfToken);
-
-          Cookies.set("csrftoken", response.data.csrfToken);
-          return response;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  };
-  
-  useEffect(() => {
+useEffect(() => {
     console.log(query);
-
-    fetchData();
+    getData()
+    // fetchData();
     if(copyList.length<10){
       setCurrent(1)
       setPrev(0)
       setLast(9)
     }
   });
+  const getprediction = () =>{
+    setLoadingStatus(true)
+    const formd = new FormData();
+    formd.append("dataset", 'whats-cooking');
+    formd.append("query", List2.join(','));
+    const res = axios
+      .post("/api/predict/RandomForestClassifier", formd, {
+        withCredentials: true
+      })
+      .then(response => {
+        console.log(response);
+        setLoadingStatus(false)
+        return response;
+
+      })
+      .catch(e => console.error(e));
+      setLoadingStatus(false)
+  }
   const handleCreate2 = (e,name)=> {
     console.log(name.name)
     let ingridient = name.name;
@@ -379,9 +320,12 @@ export default function Home(props: Props) {
           Whats Cooking ? 🍳🍪
         </Menu.Item>
         
-        
-      </Menu> 
-      <Modal show={modte} onHide={()=>{setModal(false)}}>
+        {
+          console.log(modte)
+        }
+      </Menu>
+       
+      <Modal show={modte} onHide={()=>{setModal(!modte)}}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
@@ -433,7 +377,7 @@ export default function Home(props: Props) {
     <Card id="mainCard"  style={{width:'100%',height:'43rem'}}>
       {/* </div> */}
       <Row>
-<Col md="8" >
+<Col md="7" >
 <Input style={{width:'102%', marginTop:"0.5rem", marginLeft: '0.5rem',marginRight: '0.5rem'}} icon='search' placeholder='Click on item to select...'  onChange={onSearch}/>
 
 <Card.Content  style={{marginTop:'1rem',height:"34rem"}}>
@@ -452,10 +396,10 @@ export default function Home(props: Props) {
         <List.Header as='a'>
         <span style={{marginLeft:'10px', marginRight:'1rem',borderRadius:'50%'}}>
       <Initial
-                                          radius={2222}
+                                          radius={50}
                                           height={35}
                                           width={40}
-                                          seed={1}
+                                          seed={5}
                                           fontSize={20}
                                           name={item}
                                         />
@@ -508,15 +452,17 @@ export default function Home(props: Props) {
                             >
                               Page
                             </span>
-                            <span style={{ display: 'inline-block' }}>
-                             <Input
-                                style={{ height: '2rem', width: '4rem' }}
-                                value={currentPage}
-                                onChange={onChangePage}
-                                type="number"
-                              />
-
-                              
+                            <span
+                              style={{
+                                color:"white",
+                                display: 'inline',
+                                paddingLeft: '1rem',
+                                paddingRight: '1rem',
+                                fontWeight: 'bold',
+                                fontSize: '14px'
+                              }}
+                            >
+                              {currentPage}
                             </span>
                             <span
                               style={{
@@ -559,7 +505,7 @@ export default function Home(props: Props) {
                         </div>
   </Card.Content>
   </Col>
-  <Col md="4">
+  <Col md="5">
   {
     List2.length === 0 ? <Card id="mainCard1" style={{backgroundColor:"black",opacity:"0.9",width:'100%',height:'43rem'}}>
       <Card.Content>
@@ -576,7 +522,7 @@ export default function Home(props: Props) {
         Selected Ingridients
       </h4>
 </Card.Header>
-<Card.Content>
+<Card.Content style={{overflowY:"scroll"}}>
   <Row>
     {
       List2.map((item,index)=>{
@@ -596,8 +542,13 @@ export default function Home(props: Props) {
   </Card.Content>
   <Card.Content extra>
    <div style={{float:'right'}}>
-   <Button onClick={()=>{setModal(true)}}>
+   <Button onClick={()=>{getprediction()}}>
+      <span>
+      {
+        loadingStatus === true ? <Loader/>:null}
+      
       Result
+      </span>
     </Button>
    </div>
    

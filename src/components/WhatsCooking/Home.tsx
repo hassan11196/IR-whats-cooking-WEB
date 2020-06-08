@@ -213,6 +213,7 @@ export default function Home(props: Props) {
         setCopy(newData)
         var i = 0;
         i = copyList.length;
+        console.log(i,copyList)
         setLength(i);
         var a = listLength/10;
         a = Math.ceil(a)
@@ -232,8 +233,14 @@ export default function Home(props: Props) {
   const MODEL_NAME = 'KNN';
   const DATASET_NAME = 'bbcsport';
 useEffect(() => {
-    console.log(query);
     getData()
+    var i = 0;
+        i = copyList.length;
+        console.log(i,copyList)
+        setLength(i);
+        var a = listLength/10;
+        a = Math.ceil(a)
+        setTotal(a)
     // fetchData();
     if(copyList.length<10){
       setCurrent(1)

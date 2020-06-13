@@ -253,18 +253,26 @@ useEffect(() => {
     const formd = new FormData();
     formd.append("dataset", 'whats-cooking');
     formd.append("query", List2.join(','));
+    console.log(loadingStatus)
+    
     const res = axios
       .post("/api/predict/RandomForestClassifier", formd, {
         withCredentials: true
       })
       .then(response => {
-        console.log(response);
+        console.log(response.data.result);
         setLoadingStatus(false)
+        var answer = "Your Cuisine is " + response.data.result  
+        setAlert({
+          status: true,
+          title: "Whats-Cooking ? ",
+          text: answer
+        });
         return response;
 
       })
-      .catch(e => console.error(e));
-      setLoadingStatus(false)
+      .catch(e => console.error(e)).finally();
+      // setLoadingStatus(false)
   }
   const handleCreate2 = (e,name)=> {
     console.log(name.name)
@@ -365,7 +373,7 @@ useEffect(() => {
         }}
       >
         <h1 style={{ fontSize: 65 }}>
-          {"WhatsCooking".split("").map((letter, index) => (
+          {"WhatsCooking ?".split("").map((letter, index) => (
             <span
               key={letter + index}
               style={{ color: GoogleColors[index % 4] }}
@@ -373,6 +381,9 @@ useEffect(() => {
               {letter}
             </span>
           ))}
+          <span>
+          &#128525;
+          </span>
         </h1>
         {/* <h1>Project - WhatsCooking</h1> */}
       </div>
@@ -526,7 +537,7 @@ useEffect(() => {
 
 <Card.Header style={{height:' 3rem',backgroundColor: 'black',}}>
 <h4 style={{fontSize:'25px',marginTop:"0.25rem", verticalAlign:"middle",textAlign:"center",color:'white'}}>
-        Selected Ingridients
+        Selected Ingredients
       </h4>
 </Card.Header>
 <Card.Content style={{overflowY:"scroll"}}>
@@ -534,9 +545,10 @@ useEffect(() => {
     {
       List2.map((item,index)=>{
         return(
-          <Col style={{marginBottom:'0.5rem'}} key={index} xs={6}>
-            <Card name={item}   onClick={(e,item)=>{handleCreate2(e,item)}}>
-          <Card.Content  style={{backgroundColor:GoogleColors[index % 5],color:'black',fontWeight:'700',textAlign:'center '}}>
+          <Col style={{marginBottom:'1rem'}} key={index} xs={6}>
+            <Card name={item} style={{height:'3.5rem'}}  onClick={(e,item)=>{handleCreate2(e,item)}}>
+          <Card.Content  style={{backgroundColor:GoogleColors[index % 5], color:'black',whiteSpace: 'nowrap',
+    overflow: 'hidden',textOverflow: 'ellipsis',fontWeight:'700',textAlign:'center ',verticalAlign:'middle'}}>
           {item}
             
           </Card.Content>
@@ -549,14 +561,15 @@ useEffect(() => {
   </Card.Content>
   <Card.Content extra>
    <div style={{float:'right'}}>
-   <Button onClick={()=>{getprediction()}}>
-      <span>
-      {
-        loadingStatus === true ? <Loader/>:null}
-      
-      Result
-      </span>
-    </Button>
+   {
+        loadingStatus === true ? <Loader active inline />:<Button onClick={()=>{getprediction()}}>
+        <span>
+        
+        Result
+        </span>
+      </Button>
+     }
+     
    </div>
    
   </Card.Content>

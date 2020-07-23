@@ -1,48 +1,65 @@
+# What’s Cooking? Predicting Cuisines from Recipe Ingredients
 
-## IR & AI - Project - Whats Cooking? 🍳🍪
+Kaggle is an online platform for hosting data science competitions. On September
+9, Kaggle opened a contest called “What’s Cooking?”. The goal of this contest
+is to predict the type of a cuisine (e.g. “Chinese” or “Mexican”) from the list of
+ingredients in a recipe. 
+In this [paper](https://github.com/hassan11196/IR-whats-cooking/blob/master/Whats%20Cooking.pdf), Kevin K. Do and his team describes their methodology for training an
+algorithm to make such predictions, We implemented the paper in a Jupyter Notebook and Developed a Web Application that can predict cuisine types given the ingredients list. 
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Files:
+### Jupyter Notebook:
+The Notebook Contains a Implementation of the [paper](https://github.com/hassan11196/IR-whats-cooking/blob/master/Whats%20Cooking.pdf).
 
-In the project directory, you can run:
+- Check Notebook : [IR-A3-K173654.ipynb](https://github.com/hassan11196/IR-whats-cooking/blob/master/IR-whats-cooking-proto-2.ipynb)
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Web System:
+A Web Application is hosted at  [https://whats-cooking-ir.netlify.app/](https://whats-cooking-ir.netlify.app/) .
 
-### `yarn test`
+- Check Folder for Web Interface Code : IR-WEB-A3 
+    - Repo Link : [Click Here](https://github.com/hassan11196/IR-whats-cooking-WEB)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+### ScreenShots:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ![](https://github.com/hassan11196/IR-whats-cooking/blob/master/screenshots/Annotation%202020-07-23%20082642.png?raw=true)
+- ![](https://github.com/hassan11196/IR-whats-cooking/blob/master/screenshots/Annotation%202020-07-23%20082556.png?raw=true)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Team:
 
-### `yarn eject`
+| [![Noman Anjum](https://github.com/NomanAnjum09.png?size=100)](https://github.com/NomanAnjum09) | [![Hassan Ahmed](https://github.com/hassan11196.png?size=100)](https://github.com/hassan11196) |
+| :---------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------: |
+| [Noman Anjum](https://github.com/NomanAnjum09)                                                  |                         [Hassan Ahmed](https://github.com/hassan11196)                         |
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### References:
+[https://www.kaggle.com/c/whats-cooking/](https://www.kaggle.com/c/whats-cooking/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Built Using:
 
-## Learn More
+<div align="center">
+<a href="https://www.djangoproject.com/"><img height='114' width='100' src="https://github.com/hassan11196/IR-whats-cooking/blob/master/internals/img/django.svg?raw=true" /></a>
+<a href="https://jupyter.org/"><img height='114' width='100' src="https://github.com/hassan11196/IR-whats-cooking/blob/master/internals/img/jupyter.png?raw=true" /></a>
+<br/>
+  <a href="https://facebook.github.io/react/"><img src="./internals/img/react-padded-90.png" /></a>
+  <a href="https://webpack.github.io/"><img src="./internals/img/webpack-padded-90.png" /></a>
+  <a href="https://redux.js.org/"><img src="./internals/img/redux-padded-90.png" /></a>
+  <a href="https://github.com/ReactTraining/react-router"><img src="./internals/img/react-router-padded-90.png" /></a>
+  <a href="https://eslint.org/"><img src="./internals/img/eslint-padded-90.png" /></a>
+  <a href="https://facebook.github.io/jest/"><img src="./internals/img/jest-padded-90.png" /></a>
+  <a href="https://yarnpkg.com/"><img src="./internals/img/yarn-padded-90.png" /></a>
+</div>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<hr />
+<br />
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Template:
+- [electron react boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
+
+

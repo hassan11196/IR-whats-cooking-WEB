@@ -29,9 +29,9 @@ A Web Application is hosted at [https://whats-cooking-ir.netlify.app/](https://w
 
 ### Team:
 
-| [![Noman Anjum](https://github.com/NomanAnjum09.png?size=100)](https://github.com/NomanAnjum09) | [![Hassan Ahmed](https://github.com/hassan11196.png?size=100)](https://github.com/hassan11196) |
-| :---------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------: |
-| [Noman Anjum](https://github.com/NomanAnjum09)                                                  |                         [Hassan Ahmed](https://github.com/hassan11196)                         |
+| [![Noman Anjum](https://github.com/NomanAnjum09.png?size=100)](https://github.com/NomanAnjum09) | [![Hassan Ahmed](https://github.com/hassan11196.png?size=100)](https://github.com/hassan11196) | [![Ahsan Ali](https://github.com/MuhammadAichee.png?size=100)](https://github.com/MuhammadAichee) |
+| :---------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------: |
+| [Noman Anjum](https://github.com/NomanAnjum09)                                                  |                         [Hassan Ahmed](https://github.com/hassan11196)                         |                                                    [Ahsan Ali](https://github.com/MuhammadAichee) |
 
 ### References:
 
